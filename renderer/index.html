@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src https://geocoding-api.open-meteo.com https://api.open-meteo.com https://api.aladhan.com https://api.alquran.cloud">
+<title>SolatTime - Dashboard</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<nav><span class="brand"><span data-icon="mosque"></span>SolatTime</span><a href="index.html" class="active">Dashboard</a><a href="reminders.html">My Reminders</a></nav>
+<main>
+  <div id="msg" class="msg"></div>
+  <section class="card">
+    <h2>Select Location</h2>
+    <form id="searchForm" class="row">
+      <label>City <input id="city" placeholder="e.g. Kuala Lumpur" required></label>
+      <label>Calculation method
+        <select id="method"><option value="17">JAKIM (Malaysia)</option><option value="11">MUIS (Singapore)</option>
+        <option value="3">Muslim World League</option><option value="2">ISNA (North America)</option><option value="4">Umm Al-Qura (Makkah)</option></select></label>
+      <button type="submit" id="searchBtn"><span data-icon="search"></span>Get Prayer Times</button>
+    </form>
+    <p class="small">Instructions: type a city, choose a method, then press the button.</p>
+  </section>
+
+  <div id="results" style="display:none">
+    <div class="card suggest"><h2><span data-icon="bulb"></span>Suggested Activity</h2><div id="suggestion"></div>
+      <div class="row" style="margin-top:10px"><button id="saveSuggBtn" class="gold"><span data-icon="plus"></span>Add to My Reminders</button></div></div>
+    <div class="grid">
+      <section class="card"><h2>Prayer Times</h2><p id="place" class="small"></p><p id="hijri" class="small"></p>
+        <table id="timesTable"></table></section>
+      <section class="card"><h2><span data-icon="calculator"></span>Calculations</h2><div id="calc"></div></section>
+      <section class="card"><h2><span data-icon="cloud"></span>Weather</h2><div id="weather"></div></section>
+      <section class="card"><h2><span data-icon="compass"></span>Qibla</h2><div id="qibla"></div></section>
+    </div>
+    <section class="card"><h2><span data-icon="book"></span>Verse of the Moment</h2><div id="ayah"></div>
+      <button id="newAyahBtn" class="sec" style="margin-top:10px"><span data-icon="refresh"></span>Another verse</button></section>
+  </div>
+</main>
+<script src="icon.js"></script><script src="common.js"></script><script src="index.js"></script></body></html>

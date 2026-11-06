@@ -1,0 +1,9 @@
+{
+  "name": "solattime",
+  "version": "1.0.0",
+  "description": "SolatTime - Prayer Time Application (Electron)",
+  "main": "main.js",
+  "scripts": { "start": "electron ." },
+  "license": "ISC",
+  "devDependencies": { "electron": "^31.0.0" }
+}

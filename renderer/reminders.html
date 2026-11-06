@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'">
+<title>SolatTime - Reminders</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<nav><span class="brand"><span data-icon="mosque"></span>SolatTime</span><a href="index.html">Dashboard</a><a href="reminders.html" class="active">My Reminders</a></nav>
+<main>
+  <div id="msg" class="msg"></div>
+  <section class="card">
+    <h2 id="formTitle">Add Activity Reminder</h2>
+    <form id="remForm">
+      <input type="hidden" id="editId">
+      <div class="row">
+        <label>Title <input id="title" maxlength="40" placeholder="e.g. Solat Dhuha"></label>
+        <label>Related prayer <select id="prayer"><option>Tahajjud</option><option>Fajr</option><option>Dhuha</option><option>Dhuhr</option><option>Asr</option><option>Maghrib</option><option>Isha</option><option>Other</option></select></label>
+        <label>Time <input type="time" id="time"></label>
+      </div>
+      <label style="margin-top:10px">Note <textarea id="note" rows="2" maxlength="200" placeholder="Optional details"></textarea></label>
+      <div class="row" style="margin-top:12px"><button type="submit" id="saveBtn"><span data-icon="save"></span>Save Reminder</button>
+        <button type="button" id="cancelBtn" class="sec" style="display:none">Cancel Edit</button></div>
+    </form>
+  </section>
+  <section class="card"><h2>Saved Reminders</h2><div id="list"></div></section>
+  <section class="card"><h2>Suggestion History <span class="small">(saved automatically)</span></h2>
+    <div id="history"></div><button id="clearHist" class="sec" style="margin-top:10px">Clear History</button></section>
+</main>
+<script src="icon.js"></script><script src="common.js"></script><script src="reminders.js"></script></body></html>

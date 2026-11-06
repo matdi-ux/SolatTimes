@@ -1,0 +1,284 @@
+/* style.css
+   SolatTime - styles for both pages (dashboard + reminders)
+   I tried to keep everything in one file so I don't have to chase
+   down imports. Colour palette is green + gold (mosque-y vibes).
+*/
+
+/* ---- colour variables ----
+   keeping these at the top so if I ever want to re-theme the app,
+   I only have to touch this block */
+:root {
+  --g: #0f5132;        /* dark green - nav + headings */
+  --g2: #198754;       /* lighter green - buttons, hover states */
+  --gold: #c9a227;     /* accent colour for highlights */
+  --bg: #f4f7f5;       /* page background (very light green-grey) */
+  --card: #fff;
+  --txt: #1d2b24;
+  --err: #b02a37;      /* red for errors + delete buttons */
+  --ok: #146c43;       /* green for success messages */
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  line-height: 1.5;
+}
+
+/* ============ NAVIGATION BAR ============ */
+nav {
+  background: var(--g);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+}
+
+/* the brand text ("SolatTime") gets pushed to the left and everything
+   else sits on the right thanks to margin-right: auto */
+nav .brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-right: auto;
+}
+
+nav a {
+  color: #e6f4ec;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+nav a:hover {
+  background: var(--g2);
+}
+
+nav a.active {
+  background: var(--gold);
+  color: #1d2b24;
+  font-weight: 600;
+}
+
+/* ============ MAIN LAYOUT ============ */
+main {
+  max-width: 1050px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+h2 {
+  margin: 0 0 10px;
+  color: var(--g);
+}
+
+/* the white cards that hold each section */
+.card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+  margin-bottom: 18px;
+}
+
+/* auto-fits as many columns as will fit - used for the dashboard panels */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 18px;
+}
+
+/* horizontal form row - wraps on small screens */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: end;   /* labels + inputs line up at the bottom */
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: .85rem;
+  font-weight: 600;
+  gap: 4px;
+}
+
+/* shared input styling so text fields, dropdowns and textareas
+   all look consistent */
+input, select, textarea {
+  padding: 9px 10px;
+  border: 1px solid #b8c7bf;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--g2);
+}
+
+/* ============ BUTTONS ============ */
+button {
+  background: var(--g2);
+  color: #fff;
+  border: 0;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: .95rem;
+}
+
+button:hover {
+  background: var(--g);
+}
+
+/* variants - secondary, delete, gold accent */
+button.sec  { background: #6c757d; }
+button.del  { background: var(--err); }
+button.gold { background: var(--gold); color: #1d2b24; }
+
+/* ============ MESSAGE BAR ============ */
+/* hidden by default - JS sets it to .info / .error / .success to show it */
+.msg {
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  display: none;
+}
+
+.msg.info    { display: block; background: #e7f1ff; color: #0a4aa6; }
+.msg.error   { display: block; background: #f8d7da; color: var(--err); }
+.msg.success { display: block; background: #d1e7dd; color: var(--ok); }
+
+/* ============ PRAYER TIMES TABLE ============ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td, th {
+  padding: 8px;
+  border-bottom: 1px solid #e1e8e4;
+  text-align: left;
+}
+
+/* highlight the row for the next prayer */
+tr.next {
+  background: #fff6d6;
+  font-weight: 700;
+}
+
+/* ============ MISC TEXT / CONTENT ============ */
+.big {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--g);
+}
+
+/* arabic verse - rtl + a proper arabic-friendly font stack */
+.arabic {
+  font-size: 1.5rem;
+  direction: rtl;
+  text-align: right;
+  font-family: 'Traditional Arabic', 'Amiri', serif;
+}
+
+/* the spinny arrow for qibla - I rotate it via inline style from JS */
+.arrow {
+  display: inline-block;
+  font-size: 3rem;
+  transition: transform .6s;
+}
+
+/* little pill badge - used for tags like "Fajr", "Dhuha", etc. */
+.tag {
+  display: inline-block;
+  background: #e6f4ec;
+  color: var(--g);
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: .8rem;
+}
+
+.small {
+  font-size: .85rem;
+  color: #5b6b63;
+}
+
+/* the yellow-edged card that holds the suggested activity */
+.suggest {
+  border-left: 6px solid var(--gold);
+  background: #fffdf3;
+}
+
+/* ============ REMINDER LIST ITEMS ============ */
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #e1e8e4;
+  padding: 10px 0;
+}
+
+.item .btns {
+  display: flex;
+  gap: 6px;
+}
+
+/* ============ IMAGE ICONS ============ */
+/* These size the <img> icons loaded by icon.js.
+   Different contexts need different sizes, hence the overrides below. */
+.ico {
+  width: 20px;
+  height: 20px;
+  vertical-align: -4px;
+  margin-right: 6px;
+}
+
+/* bigger inside headings */
+h2 .ico {
+  width: 26px;
+  height: 26px;
+  vertical-align: -6px;
+}
+
+/* biggest inside the brand text */
+nav .brand .ico {
+  width: 30px;
+  height: 30px;
+  vertical-align: -8px;
+}
+
+/* make button icons white (they were drawn as dark SVGs) */
+button .ico {
+  width: 18px;
+  height: 18px;
+  vertical-align: -3px;
+  filter: brightness(0) invert(1);
+  pointer-events: none;   /* so clicking the icon hits the button */
+}
+
+/* ...except on gold buttons, where dark icons look better */
+button.gold .ico {
+  filter: brightness(0);
+}
+
+/* large weather icon */
+.big .ico {
+  width: 44px;
+  height: 44px;
+  vertical-align: -10px;
+}
+
+/* the qibla arrow image - bigger and rotates smoothly */
+.ico.arrow-img {
+  width: 72px;
+  height: 72px;
+  margin: 0;
+  transition: transform .6s;
+}
